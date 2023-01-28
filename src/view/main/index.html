@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    这是主页面<br>
+    <!-- 在没有学框架之前，如果想对一个较为复杂的模块进行抽离，最简单的方法就是使用iframe外部引入页面
+    如果是那种左侧为菜单，选择后右面视图变化的布局，也可以用iframe实现
+    但要注意iframe引入的页面跟页面之间变量不共享，如果要通信的话可以使用URL传参的方式，具体可以call你们的学长学姐
+
+    iframe的性能很差！！！！！！除非一个模块的功能过于复杂需要单独拆出，
+    或者要实现类似左侧栏选择的结构，否则其他时候应该尽可能避免使用iframe -->
+    <iframe src="../../components/Table.html" frameborder="0"></iframe>
+</body>
+<!-- 注意引入顺序，先axios后api -->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.3/axios.js"></script>
+<!-- 对axios进行封装和抽离 -->
+<script src="../../api/index.js"></script>
+<!-- 引入工具函数 -->
+<script src="../../utils/check.js"></script>
+<script>
+   console.log(CheckUtils)
+   $api.getUserMessage().then(res=>{
+        console.log(res)
+   })
+</script>
+</html>

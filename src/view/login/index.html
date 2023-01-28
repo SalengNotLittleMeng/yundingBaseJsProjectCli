@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>这是登陆页面</h1>
+    账号：<input type="text" id="account"><br>
+    密码：<input type="text" id="password"><br>
+    <br>
+    <button onclick="login(false)">用户登陆</button>
+    <button onclick="login(true)">管理员登陆</button>
+</body>
+<!-- 注意引入顺序，先axios后api -->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.3/axios.js"></script>
+<!-- 对axios进行封装和抽离 -->
+<script src="../../api/index.js"></script>
+<script src="../../store/store.js"></script>
+<script>
+function login(isAdmine){
+    //这里传入的是函数的参数parasm，mock请求中这个传参是无效的，
+    //参数的具体名称和格式要等跟后端对接口时确定
+    $api.userLogin({
+        account:document.getElementById('account').value,
+        password:document.getElementById('password').value
+    }).then(res=>{
+        localStorage.setItem('Authorization',res.token)
+        //这里是模拟数据，暂时用传参的布尔值决定跳转的页面，实际项目中，
+        //登陆成功后后端应该返回用户类型，根据这个类型跳转即可
+        if(isAdmine){
+            window.location=$Store.baseUrl+'/admin/index.html'
+        }else{
+            window.location=$Store.baseUrl+'/main/index.html'
+        }
+    })
+}
+</script>
+</html>

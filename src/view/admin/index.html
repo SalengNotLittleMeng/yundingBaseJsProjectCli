@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #main{
+        width: 500px;
+        height: 300px;
+    }
+</style>
+<body>
+        <h1>这是管理员页面</h1>
+        <div id="main"></div>
+</body>
+<!-- 注意引入顺序，先axios后api -->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.3/axios.js"></script>
+<!-- 对axios进行封装和抽离 -->
+<script src="../../api/index.js"></script>
+<!-- 引入echart -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+<script src="../../charts/admin.js"></script>
+<script>
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+// 这里的$echartsAdmineLineoption是从charts文件夹中引入的变量，
+// 我们最好把各个Echart的配置抽离出去，不要写在业务逻辑里面
+// 如果要根据用户交互或后端接口实时修改配置的话，只需要修改引入的对象即可，比如：
+// $echartsAdmineLineoption.series[0].data=[23,45,67,87,90,123,654]
+$echartsAdmineLineoption && myChart.setOption($echartsAdmineLineoption);
+
+</script>
+</html>
